@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../favicon.png" type="image/png">
+    <title>NeuroNest | UX per la Neurodiversità</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Palette Choice: Cyber Neuro (Vibrant High Contrast) -->
+    <!-- Palette: Indigo #6366f1, Teal #14b8a6, Pink #ec4899, Slate #1e293b -->
+    
+    <!-- Narrative Plan: 
+         1. Intro/Prevalence (Donut)
+         2. Sensory Interface Preferences (Horizontal Bar)
+         3. Executive Function Tools Impact (Stacked Bar)
+         4. Holistic Feature Balance (Radar)
+         5. The "Safe Path" User Flow (HTML/CSS Flowchart)
+    -->
+
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        /* Custom Flowchart Connector Styling */
+        .flow-connector {
+            width: 4px;
+            background-color: #cbd5e1;
+            height: 40px;
+            margin: 0 auto;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+
+        /* Markdown List Styling for Gemini Output */
+        .gemini-output ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .gemini-output li {
+            background-color: #ffffff;
+            margin-bottom: 0.75rem;
+            padding: 1rem;
+            border-left: 4px solid #14b8a6;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        .gemini-output li::before {
+            content: "◻";
+            color: #14b8a6;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="../" class="text-2xl font-extrabold tracking-tight text-indigo-600">NeuroNest</a>
+            <div class="space-x-6 font-semibold text-slate-600">
+                <a href="../#features" class="hover:text-indigo-600 transition">Funzioni</a>
+                <a href="../#science" class="hover:text-teal-600 transition">La Scienza</a>
+                <a href="../privacy/" class="hover:text-pink-600 transition">Privacy</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-indigo-600 to-teal-500 text-white py-12 px-4 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">Case Study NeuroNest</h1>
+            <p class="text-xl md:text-2xl font-light opacity-90">Cosa serve davvero in un'app per menti neurodivergenti?</p>
+            <div class="mt-8 flex justify-center gap-4 text-sm font-semibold uppercase tracking-wider">
+                <span class="bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">Sensorialità</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">Focus</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">Routine</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12 space-y-20">
+
+        <!-- SECTION 1: Introduction & Prevalence -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-indigo-700 mb-6 border-l-8 border-teal-400 pl-4">1. Perché è Importante?</h2>
+                <p class="text-lg leading-relaxed text-slate-700 mb-6">
+                    La neurodivergenza (ADHD, Autismo, Dislessia, ecc.) non è un caso limite. Rappresenta una fetta significativa della popolazione mobile. Progettare per loro significa progettare per <strong>tutti</strong>, migliorando chiarezza e usabilità.
+                </p>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-pink-500">
+                    <p class="text-4xl font-extrabold text-slate-800 mb-2">15-20%</p>
+                    <p class="text-slate-500">Della popolazione globale presenta forme di neurodivergenza.</p>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+                <h3 class="text-center font-semibold text-slate-500 mb-4">Distribuzione Stimata Popolazione</h3>
+                <div class="chart-container">
+                    <canvas id="prevalenceChart"></canvas>
+                </div>
+                <p class="text-center text-sm text-slate-400 mt-4">Fonte: Ricerca aggregata globale</p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Sensory Interface Needs -->
+        <section>
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-indigo-700 mb-4">2. Gestione del Carico Sensoriale</h2>
+                <p class="text-lg text-slate-600">
+                    Per molte persone neurodivergenti, un'interfaccia standard può risultare fisicamente dolorosa o distraente. La personalizzazione sensoriale non è un optional, è accessibilità di base.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Data Visualization Column -->
+                <div class="md:col-span-2 bg-white p-6 rounded-2xl shadow-md">
+                    <h3 class="font-bold text-xl text-teal-600 mb-2">Feature "Salva-Vita" Richieste</h3>
+                    <p class="text-sm text-slate-500 mb-6">Percentuale di utenti che ritengono la feature essenziale per l'utilizzo.</p>
+                    <div class="chart-container">
+                        <canvas id="sensoryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Key Takeaway Cards -->
+                <div class="flex flex-col gap-6">
+                    <div class="bg-indigo-50 p-6 rounded-xl border-l-4 border-indigo-500 card-hover">
+                        <div class="text-3xl mb-2">🌑</div>
+                        <h4 class="font-bold text-indigo-900">Dark Mode Reale</h4>
+                        <p class="text-sm text-slate-600">Non solo grigio scuro, ma nero OLED per ridurre al minimo l'emissione di luce e l'affaticamento visivo.</p>
+                    </div>
+                    <div class="bg-teal-50 p-6 rounded-xl border-l-4 border-teal-500 card-hover">
+                        <div class="text-3xl mb-2">🔇</div>
+                        <h4 class="font-bold text-teal-900">Interfaccia Silenziosa</h4>
+                        <p class="text-sm text-slate-600">Possibilità di disattivare tutte le animazioni non essenziali e i suoni di notifica improvvisi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Executive Function Support -->
+        <section class="bg-slate-100 -mx-4 px-4 py-16 rounded-3xl">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold text-indigo-700 mb-6 pl-4 border-l-8 border-pink-500">3. Supporto alle Funzioni Esecutive</h2>
+                <p class="text-lg text-slate-700 mb-10 max-w-3xl">
+                    La "cecità temporale" e la paralisi decisionale sono ostacoli comuni. Vediamo come strumenti specifici (come timer visivi e suddivisione dei task) influenzano il completamento delle attività quotidiane.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg">
+                        <h3 class="font-bold text-lg text-slate-700 mb-4">Tasso di Completamento Task</h3>
+                        <p class="text-xs text-slate-400 mb-4">Con vs Senza Supporti Visivi (Timer a torta, Checklist)</p>
+                        <div class="chart-container">
+                            <canvas id="executiveChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col justify-center space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm flex items-start gap-4">
+                            <span class="text-4xl text-pink-500 font-bold">A</span>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Task Breakdown (Suddivisione)</h4>
+                                <p class="text-sm text-slate-600">Trasformare "Pulire casa" (opprimente) in "1. Raccogliere i panni, 2. Lavare i piatti" (gestibile).</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm flex items-start gap-4">
+                            <span class="text-4xl text-teal-500 font-bold">B</span>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Timer Visivi</h4>
+                                <p class="text-sm text-slate-600">I timer numerici (10:00) sono astratti. Un cerchio che svanisce rosso mostra visivamente <em>quanto</em> tempo rimane, riducendo l'ansia.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm flex items-start gap-4">
+                            <span class="text-4xl text-indigo-500 font-bold">C</span>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Body Doubling Digitale</h4>
+                                <p class="text-sm text-slate-600">Funzionalità per lavorare "insieme" a qualcun altro virtualmente per aumentare la responsabilità.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: The 5 Pillars of Support (Radar) -->
+        <section>
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-indigo-700">4. L'Equilibrio Perfetto</h2>
+                <p class="text-slate-600 mt-2">Un'app efficace non eccelle solo in una cosa, ma bilancia 5 aree chiave.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-10">
+                <div class="w-full md:w-1/2 bg-white p-4 rounded-3xl shadow-xl border border-slate-100">
+                    <div class="chart-container">
+                        <canvas id="pillarsChart"></canvas>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 space-y-4">
+                    <h3 class="font-bold text-xl text-slate-800">I Pilastri dell'UX Inclusiva</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-indigo-500"></span>
+                            <strong>Sensoriale:</strong> Colori, suoni, tattilità.
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-teal-500"></span>
+                            <strong>Esecutivo:</strong> Memoria, pianificazione, avvio.
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-pink-500"></span>
+                            <strong>Emotivo:</strong> Regolazione dell'ansia e mood.
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-orange-400"></span>
+                            <strong>Sociale:</strong> Script per conversazioni, limiti.
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-blue-400"></span>
+                            <strong>Routine:</strong> Prevedibilità e struttura.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: The Safe User Flow (Structured HTML - NO SVG/Mermaid) -->
+        <section class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-8 text-center">5. Il Flusso Utente "Safe Path"</h2>
+            <p class="text-center text-slate-600 mb-10">Come dovrebbe sentirsi l'utente navigando nell'app? Un percorso senza attriti.</p>
+
+            <div class="flex flex-col items-center">
+                
+                <!-- Step 1 -->
+                <div class="w-full max-w-md bg-white border-l-8 border-indigo-500 rounded-r-xl shadow-md p-6 relative">
+                    <div class="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-indigo-500 rounded-full border-4 border-white"></div>
+                    <h4 class="font-bold text-lg text-indigo-900">Onboarding Sensoriale</h4>
+                    <p class="text-sm text-slate-600">L'app chiede subito: "Preferisci suoni attivati?", "Vuoi font per dislessia?", "Che tema colori ti rilassa?".</p>
+                </div>
+
+                <!-- Connector -->
+                <div class="flow-connector"></div>
+
+                <!-- Step 2 -->
+                <div class="w-full max-w-md bg-white border-l-8 border-teal-500 rounded-r-xl shadow-md p-6 relative">
+                    <div class="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-teal-500 rounded-full border-4 border-white"></div>
+                    <h4 class="font-bold text-lg text-teal-900">Dashboard "Solo-Oggi"</h4>
+                    <p class="text-sm text-slate-600">Niente liste infinite. Solo le 3 cose principali da fare adesso. Riduzione del sovraccarico cognitivo.</p>
+                </div>
+
+                <!-- Connector -->
+                <div class="flow-connector"></div>
+
+                <!-- Step 3 -->
+                <div class="w-full max-w-md bg-white border-l-8 border-pink-500 rounded-r-xl shadow-md p-6 relative">
+                    <div class="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-pink-500 rounded-full border-4 border-white"></div>
+                    <h4 class="font-bold text-lg text-pink-900">Modalità Focus Assistito</h4>
+                    <p class="text-sm text-slate-600">Avvio del task con timer visivo + blocco notifiche + rumore bianco di sottofondo opzionale.</p>
+                </div>
+
+                <!-- Connector -->
+                <div class="flow-connector"></div>
+
+                <!-- Step 4 -->
+                <div class="w-full max-w-md bg-indigo-900 text-white border-l-8 border-orange-400 rounded-r-xl shadow-md p-6 relative">
+                    <div class="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-indigo-900"></div>
+                    <h4 class="font-bold text-lg">Area Decompressione</h4>
+                    <p class="text-sm opacity-80">Dopo il task o in caso di ansia: accesso immediato a breathing exercises o stimming visivo digitale.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <footer class="text-center py-12 mt-12 border-t border-slate-200">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">Progettare per la diversità è innovazione.</h3>
+            <p class="text-slate-500 max-w-2xl mx-auto">
+                Implementando queste feature, non aiutiamo solo le persone neurodivergenti. Creiamo un'esperienza digitale più calma, chiara e umana per tutti.
+            </p>
+        </footer>
+
+    </main>
+
+    <footer class="py-12 border-t border-slate-200 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-900 text-xl">NeuroNest</span>
+                <span class="text-sm">| &copy; 2026</span>
+            </div>
+            <div class="space-x-8 text-sm">
+                <a href="../privacy/" class="hover:text-indigo-600 transition">Privacy Policy</a>
+                <a href="../science/" class="hover:text-indigo-600 transition">Metodologia</a>
+                <a href="mailto:elisa.rubin@outlook.it" class="hover:text-indigo-600 transition">Contatti</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Section -->
+    <script>
+        // --- UTILITY: Label Splitting for Chart.js ---
+        // Splits strings longer than 16 chars into arrays for multi-line labels
+        function splitLabel(str) {
+            const limit = 16;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= limit) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- UTILITY: Common Tooltip Configuration ---
+        // Mandatory callback to handle array labels (multi-line) in tooltips
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- CHART 1: Prevalence (Donut) ---
+        const ctxPrevalence = document.getElementById('prevalenceChart').getContext('2d');
+        new Chart(ctxPrevalence, {
+            type: 'doughnut',
+            data: {
+                labels: ['Neurotipici', 'Neurodivergenti'],
+                datasets: [{
+                    data: [80, 20],
+                    backgroundColor: ['#e2e8f0', '#6366f1'], // Slate-200, Indigo-500
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: commonTooltipConfig,
+                    title: {
+                        display: true,
+                        text: 'Stima Globale',
+                        font: { size: 16, family: 'Outfit' }
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+
+        // --- CHART 2: Sensory Needs (Horizontal Bar) ---
+        // Labels to be processed
+        const rawLabelsSensory = [
+            "Dark Mode Personalizzabile",
+            "Font Dislessia Friendly",
+            "Disattivazione Animazioni",
+            "Sintesi Vocale (TTS)",
+            "Rumore Bianco Integrato"
+        ];
+        const processedLabelsSensory = rawLabelsSensory.map(splitLabel);
+
+        const ctxSensory = document.getElementById('sensoryChart').getContext('2d');
+        new Chart(ctxSensory, {
+            type: 'bar',
+            data: {
+                labels: processedLabelsSensory,
+                datasets: [{
+                    label: '% Importanza Utente',
+                    data: [92, 65, 85, 55, 70],
+                    backgroundColor: [
+                        '#6366f1', // Indigo
+                        '#14b8a6', // Teal
+                        '#ec4899', // Pink
+                        '#f59e0b', // Amber
+                        '#8b5cf6'  // Violet
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Horizontal Bar
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { display: false }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                }
+            }
+        });
+
+        // --- CHART 3: Executive Function (Stacked Bar) ---
+        // Comparison: Task Completion with standard tools vs specialized tools
+        const ctxExecutive = document.getElementById('executiveChart').getContext('2d');
+        new Chart(ctxExecutive, {
+            type: 'bar',
+            data: {
+                labels: ['Liste Standard', 'App Neuro-Inclusive'],
+                datasets: [
+                    {
+                        label: 'Task Completati',
+                        data: [45, 85],
+                        backgroundColor: '#14b8a6', // Teal (Success)
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Abbandono per Ansia',
+                        data: [55, 15],
+                        backgroundColor: '#e11d48', // Rose (Failure/Anxiety)
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true, grid: { display: false } },
+                    y: { stacked: true, beginAtZero: true, max: 100 }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: commonTooltipConfig
+                }
+            }
+        });
+
+        // --- CHART 4: Pillars of Support (Radar) ---
+        const ctxPillars = document.getElementById('pillarsChart').getContext('2d');
+        new Chart(ctxPillars, {
+            type: 'radar',
+            data: {
+                labels: ['Sensoriale', 'Esecutivo', 'Emotivo', 'Sociale', 'Routine'],
+                datasets: [{
+                    label: 'Focus App Ideale',
+                    data: [90, 95, 80, 60, 85],
+                    fill: true,
+                    backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                    borderColor: '#6366f1',
+                    pointBackgroundColor: '#ec4899',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#ec4899'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        ticks: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

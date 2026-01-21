@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroNest | La tua mente, il tuo ritmo</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(to r, #6366f1, #14b8a6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="./" class="text-2xl font-extrabold tracking-tight text-indigo-600">NeuroNest</a>
+            <div class="space-x-6 font-semibold text-slate-600">
+                <a href="#features" class="hover:text-indigo-600 transition">Funzioni</a>
+                <a href="#science" class="hover:text-teal-600 transition">La Scienza</a>
+                <a href="privacy/" class="hover:text-pink-600 transition">Privacy</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-20 pb-32 px-6 overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+                Il primo planner che sa <br><span class="gradient-text">come ti senti.</span>
+            </h1>
+            <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
+                NeuroNest non è solo un'app di task. È un ecosistema adattivo progettato per superare la task paralysis e rispettare i tuoi livelli di energia.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#" aria-disabled="true" class="bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-indigo-200 opacity-60 cursor-not-allowed pointer-events-none inline-flex items-center gap-3">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Google_Play_2012-2016_icon.svg/250px-Google_Play_2012-2016_icon.svg.png?20120922171712" alt="" class="w-5 h-5" loading="lazy" decoding="async">
+                    <span>Presto disponibile</span>
+                </a>
+                <a href="#science" class="bg-white text-slate-700 border border-slate-200 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-50 transition">Perché funziona?</a>
+            </div>
+        </div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-0 opacity-10">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-indigo-400 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-teal-400 rounded-full blur-3xl"></div>
+        </div>
+    </header>
+
+    <section id="features" class="py-24 bg-white px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Gestione Dinamica dell'Energia</h2>
+                <p class="text-slate-500">L'interfaccia cambia con te, per non sovraccaricarti mai.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:border-indigo-300 transition group">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 font-bold">01</div>
+                    <h3 class="text-2xl font-bold mb-4">Modalità Normal</h3>
+                    <p class="text-slate-600">Visione completa di routine, task e studio. Ideale per quando hai il pieno controllo della tua giornata.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:border-teal-300 transition">
+                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-6 font-bold">02</div>
+                    <h3 class="text-2xl font-bold mb-4">Modalità Tired</h3>
+                    <p class="text-slate-600">Interfaccia semplificata. Nascondiamo il rumore visivo per permetterti di finire le cose importanti senza stress.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-slate-900 text-white border border-slate-800 hover:border-pink-500 transition">
+                    <div class="w-12 h-12 bg-pink-500 text-white rounded-xl flex items-center justify-center mb-6 font-bold">03</div>
+                    <h3 class="text-2xl font-bold mb-4 text-pink-400">Modalità Overload</h3>
+                    <p class="text-slate-300 text-sm">Task paralysis attiva? Mostriamo <strong>solo una card</strong>, la più urgente, con il suo primo micro-step. Nient'altro.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="science" class="py-24 bg-slate-900 text-white px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl font-bold mb-8 leading-tight">Progettata sulla <br><span class="text-teal-400">Realtà Neurodivergente</span></h2>
+                <div class="space-y-8">
+                    <div class="flex gap-4">
+                        <div class="text-3xl font-bold text-indigo-400 italic">15-20%</div>
+                        <p class="text-slate-400">Della popolazione globale è neurodivergente. NeuroNest nasce per servire questo enorme potenziale spesso ignorato.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="text-3xl font-bold text-pink-400 italic">85%</div>
+                        <p class="text-slate-400">Tasso di completamento task con supporti visivi e suddivisione IA, contro il 45% delle app tradizionali.</p>
+                    </div>
+                </div>
+                <div class="mt-12">
+                    <a href="science/" class="inline-flex items-center text-teal-400 font-bold hover:gap-3 transition-all gap-2">
+                        Leggi il case study completo <span>→</span>
+                    </a>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
+                    <span class="block text-2xl mb-2">🧠</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Esecutivo</span>
+                </div>
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
+                    <span class="block text-2xl mb-2">🌈</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-teal-400">Sensoriale</span>
+                </div>
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
+                    <span class="block text-2xl mb-2">❤️</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-pink-400">Emotivo</span>
+                </div>
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
+                    <span class="block text-2xl mb-2">🔄</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-orange-400">Routine</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-slate-200 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-900 text-xl">NeuroNest</span>
+                <span class="text-sm">| &copy; 2026</span>
+            </div>
+            <div class="space-x-8 text-sm">
+                <a href="privacy/" class="hover:text-indigo-600 transition">Privacy Policy</a>
+                <a href="science/" class="hover:text-indigo-600 transition">Metodologia</a>
+                <a href="mailto:elisa.rubin@outlook.it" class="hover:text-indigo-600 transition">Contatti</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
